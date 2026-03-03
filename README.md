@@ -38,11 +38,41 @@ More details in `docs/CONTROL_MATRIX.md`.
 
 ```mermaid
 flowchart LR
-  U[User/Admin] --> UI[Web UI]
-  UI --> API[Gateway API]
-  API --> META[(Meta DB: roles, grants, templates, targets, logs)]
-  API --> TDB[(Target DBs: MySQL/Postgres)]
-  API --> INTEG[Integrity snapshots: hash + verify]
+    %% Modern Styling
+    classDef user fill:#2563eb,stroke:#1d4ed8,stroke-width:2px,color:#fff,rx:8px,ry:8px;
+    classDef ui fill:#0ea5e9,stroke:#0284c7,stroke-width:2px,color:#fff,rx:8px,ry:8px;
+    classDef api fill:#8b5cf6,stroke:#7c3aed,stroke-width:2px,color:#fff,rx:8px,ry:8px;
+    classDef db fill:#10b981,stroke:#059669,stroke-width:2px,color:#fff,rx:8px,ry:8px;
+    classDef security fill:#f43f5e,stroke:#e11d48,stroke-width:2px,color:#fff,rx:8px,ry:8px;
+    classDef group fill:#f8fafc,stroke:#cbd5e1,stroke-width:2px,stroke-dasharray: 5 5,rx:10px,ry:10px,color:#334155;
+
+    %% Nodes
+    U[["👤 User / Admin"]]:::user
+    
+    subgraph Frontend ["Front-End Layer"]
+        UI["🖥️ Web UI (Dashboard / Admin)"]:::ui
+    end
+
+    subgraph Core ["Gateway Enforcement Layer"]
+        API["🛡️ API Gateway (AuthN & AuthZ)"]:::api
+        INTEG["🔍 Integrity Engine (Hash & Verify)"]:::security
+    end
+
+    subgraph Storage ["Data Layer"]
+        META[/"⚙️ Meta DB (Roles, Logs, Config)"/]:::db
+        TDB[/"🗄️ Target DBs (MySQL / Postgres)"/]:::db
+    end
+
+    %% Flow
+    U -- "HTTPS / MFA" --> Frontend
+    UI -- "REST / Actions" --> API
+    API -- "Audit & Enforce" --> META
+    API -- "Execute Template" --> TDB
+    INTEG -. "Scheduled Snapshots" .-> TDB
+    API -. "Trigger Verification" .-> INTEG
+
+    %% Grouping styling
+    class Frontend,Core,Storage group;
 ```
 
 ## UI Evidence (Screenshots)
