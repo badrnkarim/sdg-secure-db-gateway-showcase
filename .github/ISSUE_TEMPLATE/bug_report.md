@@ -8,18 +8,16 @@ labels: bug
 ## Summary
 What happened?
 
-## Steps to Reproduce
-1.
-2.
-3.
+## Steps to reproduce
+1. 
+2. 
+3. 
 
-## Expected Behavior
-What did you expect?
+## Expected
+What should have happened?
 
 ## Evidence
 Screenshots/logs (redact secrets).
 
 ## Environment
-- OS:
-- Browser:
-- SDG version/commit:
+OS / Browser:

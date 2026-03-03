@@ -4,113 +4,91 @@
 ![License](https://img.shields.io/github/license/badrnkarim/sdg-secure-db-gateway-showcase)
 ![Last Commit](https://img.shields.io/github/last-commit/badrnkarim/sdg-secure-db-gateway-showcase)
 
-**SDG** is a security-first gateway between users and databases. It enforces **MFA (OTP)**, **RBAC**, **template-only SQL execution**, **SQL safety controls**, **SSRF-safe target validation**, and **full auditability** (activity logs, query-run history, integrity snapshots).
+**SDG** is a security-first access layer between users and databases. It enforces **MFA (OTP)**, **RBAC**, **template-only SQL execution**, **SQL safety controls**, **SSRF-safe target validation**, and **auditability** (logs + integrity snapshots).
 
-> This repository is a **showcase** (documentation + UI evidence). It’s designed to be recruiter-friendly and audit-friendly.
-
----
-
-## What SDG prevents (at a glance)
-- Direct DB access sprawl and unmanaged credentials
-- Raw SQL submission from users
-- Dangerous statements (e.g., `DROP`) via safety enforcement
-- Target endpoint abuse / internal pivoting (allowlist validation)
-- Untracked admin actions (full audit trail)
+This repository is a **US-grade showcase**, featuring complete documentation, architectural reports, and curated UI evidence to demonstrate security posture and best practices.
 
 ---
 
-## Architecture
+## Why this matters
+Direct database access creates credential sprawl and weak auditability. SDG centralizes control into one rigid enforcement point:
+- Authenticate strongly (**MFA**)
+- Authorize explicitly (**RBAC grants**)
+- Execute safely (**approved templates only**)
+- Block abuse (**SQL safety + SSRF/allowlist**)
+- Provide evidence (**logs + integrity verification**)
+
+---
+
+## Key security controls (evidence-based)
+
+| Control | What it stops | Evidence |
+|---|---|---|
+| RBAC grants | Unauthorized access | `docs/assets/permissions.png` |
+| Template-only SQL | Raw SQL / injection paths | `docs/assets/templates.png` |
+| SQL safety enforcement | Destructive SQL (`DROP`, etc.) | `docs/assets/sql_blocked_drop.png` |
+| Target allowlist validation | SSRF / internal pivoting | `docs/assets/target_endpoint_blocked.png` |
+| Integrity snapshots | Silent DB changes | `docs/assets/integrity_match.png` / `docs/assets/integrity_mismatch.png` |
+
+More details in `docs/CONTROL_MATRIX.md`.
+
+---
+
+## Architecture (high level)
 
 ```mermaid
 flowchart LR
   U[User/Admin] --> UI[Web UI]
-  UI --> API[SDG Gateway API]
-  API --> META[(Meta DB: users/roles/grants/templates/targets/logs)]
-  API --> T1[(Target DBs: MySQL/Postgres)]
-  API --> LOGS[(Activity Log + Query Run History)]
-  API --> INTEG[(Integrity Snapshots: hash & verify)]
+  UI --> API[Gateway API]
+  API --> META[(Meta DB: roles, grants, templates, targets, logs)]
+  API --> TDB[(Target DBs: MySQL/Postgres)]
+  API --> INTEG[Integrity snapshots: hash + verify]
 ```
 
-More details: **docs/ARCHITECTURE.md**
+## UI Evidence (Screenshots)
 
----
-
-## Key Security Controls
-
-| Control | What it enforces | Evidence |
-|---|---|---|
-| MFA (OTP) | Stronger authentication for access | Project report + UI flows |
-| RBAC | Explicit grants: Role→Target, Role→Template, User→Role | `docs/assets/permissions.png` |
-| Template-only SQL | Users can’t submit raw SQL | `docs/assets/templates.png` |
-| SQL safety | Blocks dangerous operations (e.g., DROP) | `docs/assets/sql_blocked_drop.png` |
-| SSRF-safe targets | Allowlist endpoint validation | `docs/assets/target_endpoint_blocked.png` |
-| Auditability | Activity Log + Query Run History | UI + report |
-| Integrity snapshots | Detects changes over time | `docs/assets/integrity_match.png`, `integrity_mismatch.png` |
-
-More details: **docs/SECURITY_CONTROLS.md**
-
----
-
-## Screenshots (UI Evidence)
-
-### Admin Panel
-<p align="center">
-  <img src="docs/assets/admin_panel.png" width="920" alt="Admin Panel">
-</p>
+**Admin Panel**  
+<img src="docs/assets/admin_panel.png" width="920" alt="Admin Panel">
 
 <details>
-<summary><b>Show more screenshots</b></summary>
+<summary><b>Show full evidence set</b></summary>
 
-**RBAC Permission Management**
-<p align="center">
-  <img src="docs/assets/permissions.png" width="920" alt="Permission Management">
-</p>
+<br>
 
-**Templates (approved query templates)**
-<p align="center">
-  <img src="docs/assets/templates.png" width="920" alt="Templates">
-</p>
+**RBAC Permission Management**  
+<img src="docs/assets/permissions.png" width="920" alt="Permissions">
 
-**Controlled execution (template run success)**
-<p align="center">
-  <img src="docs/assets/dashboard_query_success.png" width="920" alt="Query Success">
-</p>
+**Approved Templates (no raw SQL)**  
+<img src="docs/assets/templates.png" width="920" alt="Templates">
 
-**Integrity verification (match / mismatch)**
-<p align="center">
-  <img src="docs/assets/integrity_match.png" width="920" alt="Integrity Match">
-</p>
-<p align="center">
-  <img src="docs/assets/integrity_mismatch.png" width="920" alt="Integrity Mismatch">
-</p>
+**Controlled execution (success)**  
+<img src="docs/assets/dashboard_query_success.png" width="920" alt="Query success">
 
-**Security enforcement proofs**
-<p align="center">
-  <img src="docs/assets/target_endpoint_blocked.png" width="920" alt="Target Endpoint Blocked">
-</p>
-<p align="center">
-  <img src="docs/assets/sql_blocked_drop.png" width="920" alt="SQL Blocked">
-</p>
+**Integrity verification (match / mismatch)**  
+<img src="docs/assets/integrity_match.png" width="920" alt="Integrity match">  
+<img src="docs/assets/integrity_mismatch.png" width="920" alt="Integrity mismatch">
+
+**Enforcement proofs**  
+<img src="docs/assets/target_endpoint_blocked.png" width="920" alt="Target blocked">  
+<img src="docs/assets/sql_blocked_drop.png" width="920" alt="SQL blocked">
 
 </details>
 
-Screenshot mapping: **docs/SCREENSHOTS.md**
+*Screenshot mapping index:* `docs/SCREENSHOTS.md`
 
 ---
 
 ## Documentation
-- Full report (PDF): **docs/SDG_Project_Report.pdf**
-- One-pager: **docs/ONE_PAGER.md**
+- **Full report (PDF)**: `docs/SDG_Project_Report.pdf`
+- **Demo walkthrough**: `docs/DEMO_WALKTHROUGH.md`
+- **Threat model**: `docs/THREAT_MODEL.md`
 
 ---
 
 ## Ownership
-**Owner / Maintainer:** Badr Karim  
-Repo: https://github.com/badrnkarim/sdg-secure-db-gateway-showcase
 
-See **AUTHORS.md** for contributors.
-
----
+- **Owner / Maintainer**: Badr Karim
+- **GitHub**: [@badrnkarim](https://github.com/badrnkarim)
 
 ## License
-MIT — see **LICENSE**.
+MIT License — see [LICENSE](LICENSE) for details.

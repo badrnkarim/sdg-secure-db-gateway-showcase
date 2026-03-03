@@ -3,6 +3,6 @@
 **Owner / Maintainer**
 - Badr Karim
 
-**Project Contributors**
+**Contributors**
 - Mohammad Abualhaj
 - Yousef Abulesan

@@ -4,10 +4,10 @@
 ## Why?
 -
 
-## Security impact
+## Security checklist
 - [ ] No secrets added
 - [ ] No unsafe query execution paths introduced
-- [ ] Logging/auditing behavior considered
+- [ ] Auditing/logging considered
 
 ## Screenshots (if UI changed)
 -

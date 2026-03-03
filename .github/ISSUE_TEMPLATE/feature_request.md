@@ -8,11 +8,8 @@ labels: enhancement
 ## Problem
 What problem does this solve?
 
-## Proposed Solution
-Describe the change.
+## Proposal
+What should change?
 
-## Security Considerations
+## Security impact
 How does this affect auth/RBAC/safety/auditing?
-
-## Alternatives
-Any other approaches?

@@ -1,10 +1,10 @@
-# Screenshot Index (What each proves)
+# Screenshot Index
 
-- **admin_panel.png** — Admin control plane entrypoint (Targets/Templates/Permissions/Logs/Integrity)
-- **permissions.png** — RBAC management (role creation + granting targets/templates/users)
-- **templates.png** — Approved query templates (cross-DB support, max rows, active state)
-- **dashboard_query_success.png** — Successful controlled execution via template
-- **integrity_match.png** — Integrity verified (stored hash matches computed)
-- **integrity_mismatch.png** — Change detected (stored hash differs from computed)
-- **target_endpoint_blocked.png** — Target endpoint blocked (allowlist / SSRF-safe validation)
-- **sql_blocked_drop.png** — Dangerous SQL blocked at template creation (DROP denied)
+- `admin_panel.png` — Admin control plane (Targets/Templates/Permissions/Logs/Integrity)
+- `permissions.png` — RBAC management and grants
+- `templates.png` — Approved templates list (cross-DB, active)
+- `dashboard_query_success.png` — Template execution success (privacy-safe crop if available)
+- `integrity_match.png` — Integrity verified (match)
+- `integrity_mismatch.png` — Change detected (mismatch)
+- `target_endpoint_blocked.png` — Target endpoint rejected (allowlist / SSRF-safe)
+- `sql_blocked_drop.png` — Dangerous SQL blocked at template creation

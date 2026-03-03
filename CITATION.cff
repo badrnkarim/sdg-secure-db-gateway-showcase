@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 title: "Secure Database Gateway (SDG)"
-message: "If you use this project, please cite it."
+message: "If you use this work, please cite it."
 type: software
 authors:
   - name: "Badr Karim"
