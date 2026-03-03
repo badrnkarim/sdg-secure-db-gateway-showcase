@@ -1,0 +1,8 @@
+cff-version: 1.2.0
+title: "Secure Database Gateway (SDG)"
+message: "If you use this project, please cite it."
+type: software
+authors:
+  - name: "Badr Karim"
+year: 2026
+url: "https://github.com/badrnkarim/sdg-secure-db-gateway-showcase"

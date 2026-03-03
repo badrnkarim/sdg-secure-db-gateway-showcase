@@ -1,6 +1,8 @@
 # Security Policy
 
-This repository is a showcase/demo of Secure Database Gateway (SDG). It is not production-ready without a full security review.
+This repository is a **showcase** of Secure Database Gateway (SDG). It demonstrates security controls and UI evidence.
+It is not intended for production use without a full security review and hardening.
 
-## Reporting
-Please do not post exploit details publicly. Report security findings privately.
+## Reporting a Vulnerability
+Please avoid posting exploit details in public issues.
+If you find a security issue, open a GitHub Security Advisory (preferred) or contact the maintainer privately.
